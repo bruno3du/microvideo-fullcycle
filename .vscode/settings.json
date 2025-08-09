@@ -1,0 +1,59 @@
+{
+  "workbench.tree.indent": 15,
+  "workbench.tree.renderIndentGuides": "always",
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "workbench.colorCustomizations": {
+    "tree.indentGuidesStroke": "#dfff28"
+  },
+  "editor.formatOnSave": true,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always",
+    "source.fixAll.eslint": "always",
+    "source.organizeImports.autoRemove": "always"
+  },
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|^)\\s*($TAGS)|^//\\s*\\[x\\]|^//\\s*\\[ \\])",
+  "todo-tree.general.tags": [
+    "TODO",
+    "FIXED",
+    "BUG"
+  ],
+  "todo-tree.highlights.customHighlight": {
+    "TODO": {
+      "icon": "alert",
+      "type": "line",
+      "foreground": "#ff6f00",
+      "iconColour": "#ff6f00",
+      "gutterIcon": true
+    },
+    "BUG": {
+      "icon": "bug",
+      "type": "line",
+      "foreground": "#ff0000",
+      "iconColour": "#ff0000",
+      "gutterIcon": true
+    },
+    "FIXED": {
+      "icon": "shield-check",
+      "type": "line",
+      "foreground": "#00ff00",
+      "iconColour": "#00ff00",
+      "gutterIcon": true
+    }
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "files.watcherExclude": {
+    "**/node_modules": true,
+    "**/.next": true,
+    "**/dist": true,
+    "**/build": true
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
