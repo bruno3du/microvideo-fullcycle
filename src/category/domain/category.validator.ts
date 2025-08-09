@@ -4,8 +4,8 @@ import {
   IsOptional,
   IsString,
   MaxLength,
-  validateSync,
 } from 'class-validator';
+import { ClassValidatorFields } from '../../shared/domain/validators/class-validator-fields';
 import { Category } from './category.entity';
 
 class CategoryRules {
@@ -27,9 +27,14 @@ class CategoryRules {
   }
 }
 
-export class CategoryValidator {
+export class CategoryValidator extends ClassValidatorFields<CategoryRules> {
   validate(entity: Category) {
-    const validator = new CategoryRules(entity);
-    return validateSync(validator);
+    return super.validate(new CategoryRules(entity));
+  }
+}
+
+export class CategoryValidatorFactory {
+  static create() {
+    return new CategoryValidator();
   }
 }
