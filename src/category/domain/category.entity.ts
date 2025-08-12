@@ -2,6 +2,7 @@ import { Entity } from '../../shared/domain/entity';
 import { EntityValidationError } from '../../shared/domain/validators/validation.error';
 import { ValueObject } from '../../shared/domain/value-object';
 import { Uuid } from '../../shared/domain/value-objects/uuid-vo';
+import { CategoryFakeBuilder } from './category-fake.builder';
 import { CategoryValidatorFactory } from './category.validator';
 
 export type CategoryConstructorProps = {
@@ -40,18 +41,18 @@ export class Category extends Entity {
 
   static create(props: CategoryCreateCommand): Category {
     const category = new Category(props);
-    Category.validate(category);
+    category.validate();
     return category;
   }
 
   changeName(name: string): void {
     this.name = name;
-    Category.validate(this);
+    this.validate();
   }
 
   changeDescription(description: string): void {
     this.description = description;
-    Category.validate(this);
+    this.validate();
   }
 
   activate() {
@@ -62,12 +63,16 @@ export class Category extends Entity {
     this.is_active = false;
   }
 
-  static validate(entity: Category) {
+  validate() {
     const validator = CategoryValidatorFactory.create();
-    const isValid = validator.validate(entity);
+    const isValid = validator.validate(this);
     if (!isValid) {
       throw new EntityValidationError(validator.errors!);
     }
+  }
+
+  static fake() {
+    return CategoryFakeBuilder;
   }
 
   toJSON() {
