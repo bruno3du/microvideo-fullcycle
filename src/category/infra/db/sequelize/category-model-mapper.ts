@@ -1,4 +1,4 @@
-import { Uuid } from '../../../../shared/domain/value-objects/uuid-vo';
+import { Uuid } from '../../../../shared/domain/value-objects/uuid.vo';
 import { Category } from '../../../domain/category.entity';
 import { CategoryModel } from './category.model';
 
