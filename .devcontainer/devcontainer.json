@@ -35,7 +35,8 @@
 				"esbenp.prettier-vscode",
 				"dbaeumer.vscode-eslint",
 				"eamodio.gitlens",
-				"vitest.explorer"
+				"natqe.reload",
+				"orta.vscode-jest"
 			]
 		}
 	}
