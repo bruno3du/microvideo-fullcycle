@@ -1,9 +1,17 @@
+import { CategoryModel } from '@core/category/infra/db/sequelize/category.model';
 import { Module } from '@nestjs/common';
+import { SequelizeModule } from '@nestjs/sequelize';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { CategoriesModule } from './categories/categories.module';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
-  imports: [],
+  imports: [
+    DatabaseModule,
+  
+    CategoriesModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
