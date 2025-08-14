@@ -84,12 +84,12 @@ export class CategoryFakeBuilder<TBuild = any> {
             created_at: this.callFactory(this._created_at, index),
           }),
         });
-        Category.validate(category);
+        category.validate();
         return category;
       });
     return this.countObjs === 1
-      ? (categories[0] as any)
-      : (categories as TBuild);
+      ? (categories[0] as TBuild)
+      : (categories as unknown as TBuild);
   }
 
   get category_id() {

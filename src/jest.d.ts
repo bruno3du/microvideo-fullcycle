@@ -1,9 +1,9 @@
-import { FieldsErrors } from './shared/domain/validators/validator-fields-interface';
+import { Expected } from './shared/infra/testing/types';
 
 declare global {
   namespace jest {
     interface Matchers<R> {
-      containsErrorMessages: (expected: FieldsErrors) => R;
+      notificationContainsErrorMessages: (expected: Expected) => R;
     }
   }
 }

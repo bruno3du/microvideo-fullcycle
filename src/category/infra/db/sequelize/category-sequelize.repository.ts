@@ -80,7 +80,6 @@ export class CategorySequelizeRepository implements ICategoryRepository {
       offset,
       limit,
     });
-
     return new CategorySearchResult({
       items: models.map((model) => {
         return CategoryModelMapper.toEntity(model);
