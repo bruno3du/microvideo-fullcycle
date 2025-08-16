@@ -1,51 +1,42 @@
-import { CategorySequelizeRepository } from '@core/category/infra/db/sequelize/category-sequelize.repository';
-import { CategoryModel } from '@core/category/infra/db/sequelize/category.model';
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Inject,
-  Param,
-  Patch,
-  Post,
-} from '@nestjs/common';
-import { getModelToken } from '@nestjs/sequelize';
-import { CreateCategoryDto } from './dto/create-category.dto';
-import { UpdateCategoryDto } from './dto/update-category.dto';
+import { CreateCategoryInput } from '@core/category/application/use-cases/create-category/create-category.input';
+import { CreateCategoryUseCase } from '@core/category/application/use-cases/create-category/create-category.use-case';
+import { DeleteCategoryUseCase } from '@core/category/application/use-cases/delete-category/delete-category.use-case';
+import { GetCategoryUseCase } from '@core/category/application/use-cases/get-category/get-category.use-case';
+import { ListCategoriesUseCase } from '@core/category/application/use-cases/list-categories/list-categories.use-case';
+import { UpdateCategoryInput } from '@core/category/application/use-cases/update-category/update-category.input';
+import { UpdateCategoryUseCase } from '@core/category/application/use-cases/update-category/update-category.use-case';
+import { Body, Controller, Inject, Param, Patch, Post } from '@nestjs/common';
 
 @Controller('categories')
 export class CategoriesController {
-  constructor(
-    @Inject(getModelToken(CategoryModel))
-    private categoryRepository: CategorySequelizeRepository,
-  ) {}
+  @Inject(CreateCategoryUseCase)
+  private createUseCase: CreateCategoryUseCase;
+
+  @Inject(UpdateCategoryUseCase)
+  private updateUseCase: UpdateCategoryUseCase;
+
+  @Inject(DeleteCategoryUseCase)
+  private deleteUseCase: DeleteCategoryUseCase;
+
+  @Inject(GetCategoryUseCase)
+  private getUseCase: GetCategoryUseCase;
+
+  @Inject(ListCategoriesUseCase)
+  private listUseCase: ListCategoriesUseCase;
 
   @Post()
-  create(@Body() createCategoryDto: CreateCategoryDto) {
-    return 'create';
-  }
-
-  @Get()
-  findAll() {
-    return 'findAll';
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return 'findOne';
+  create(@Body() createCategoryDto: CreateCategoryInput) {
+    return this.createUseCase.execute(createCategoryDto);
   }
 
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body() updateCategoryDto: UpdateCategoryDto,
+    @Body() updateCategoryDto: UpdateCategoryInput,
   ) {
-    return 'update';
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return 'remove';
+    return this.updateUseCase.execute({
+      ...updateCategoryDto,
+      id,
+    });
   }
 }
