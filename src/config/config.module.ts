@@ -6,26 +6,6 @@ import {
 import Joi from 'joi';
 import { join } from 'path';
 
-// //@ts-expect-error - the type is correct
-// const joiJson = Joi.extend((joi) => {
-//   return {
-//     type: 'object',
-//     base: joi.object(),
-//     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-//     coerce(value, _schema) {
-//       if (value[0] !== '{' && !/^\s*\{/.test(value)) {
-//         return;
-//       }
-
-//       try {
-//         return { value: JSON.parse(value) };
-//       } catch (err) {
-//         console.error(err);
-//       }
-//     },
-//   };
-// });
-
 type DB_SCHEMA_TYPE = {
   DB_VENDOR: 'mysql' | 'sqlite';
   DB_HOST: string;
@@ -70,8 +50,8 @@ export class ConfigModule extends NestConfigModule {
     return super.forRoot({
       isGlobal: true,
       envFilePath: [
-        ...(Array.isArray(envFilePath) ? envFilePath! : [envFilePath!]),
-        join(process.cwd(), 'envs', `.env.${process.env.NODE_ENV!}`),
+        ...(Array.isArray(envFilePath) ? envFilePath : [envFilePath!]),
+        join(process.cwd(), 'envs', `.env.${process.env.NODE_ENV}`),
         join(process.cwd(), 'envs', `.env`),
       ],
       validationSchema: Joi.object({
