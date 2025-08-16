@@ -214,7 +214,7 @@ describe('Schema Unit Tests', () => {
 });
 
 describe('ConfigModule Unit Tests', () => {
-  it.skip('should throw an error when env vars are invalid', () => {
+  it('should throw an error when env vars are invalid', () => {
     try {
       Test.createTestingModule({
         imports: [
@@ -225,8 +225,6 @@ describe('ConfigModule Unit Tests', () => {
       });
       fail('ConfigModule should throw an error when env vars are invalid');
     } catch (e) {
-      console.log(e.message);
-
       expect(e.message).toContain('"DB_VENDOR" must be one of [mysql, sqlite]');
     }
   });
