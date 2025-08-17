@@ -17,7 +17,10 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { CategoryPresenter } from 'src/nest-modules/categories-module/categories.presenter';
+import {
+  CategoryCollectionPresenter,
+  CategoryPresenter,
+} from 'src/nest-modules/categories-module/categories.presenter';
 import { CreateCategoryDto } from 'src/nest-modules/categories-module/dto/create-category.dto';
 import { SearchCategoriesDto } from 'src/nest-modules/categories-module/dto/search-categories.dto';
 import { UpdateCategoryDto } from 'src/nest-modules/categories-module/dto/update-category.dto';
@@ -42,7 +45,7 @@ export class CategoriesController {
   @Get()
   async search(@Query() searchParams: SearchCategoriesDto) {
     const output = await this.listUseCase.execute(searchParams);
-    return output.items.map(CategoriesController.serialize);
+    return new CategoryCollectionPresenter(output);
   }
 
   @Post()
@@ -66,7 +69,7 @@ export class CategoriesController {
 
   @HttpCode(204)
   @Delete(':id')
-  async delete(
+  async remove(
     @Param('id', new ParseUUIDPipe({ errorHttpStatusCode: 422 })) id: string,
   ) {
     return this.deleteUseCase.execute({ id });
