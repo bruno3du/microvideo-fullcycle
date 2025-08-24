@@ -16,6 +16,9 @@
     "paths": {
       "@core/*": [
         "./src/core/*"
+      ],
+      "@nest-modules/*": [
+        "./src/nest-modules/*"
       ]
     }
   },
