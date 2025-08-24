@@ -5,7 +5,12 @@ import { DatabaseModule } from './nest-modules/database-module/database.module';
 import { SharedModule } from './nest-modules/shared-module/shared.module';
 
 @Module({
-  imports: [DatabaseModule, CategoriesModule, ConfigModule, SharedModule],
+  imports: [
+    ConfigModule.forRoot(),
+    DatabaseModule,
+    CategoriesModule,
+    SharedModule,
+  ],
   controllers: [],
   providers: [],
 })
