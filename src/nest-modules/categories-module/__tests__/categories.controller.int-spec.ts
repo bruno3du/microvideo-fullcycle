@@ -7,9 +7,11 @@ import { DeleteCategoryUseCase } from '../../../core/category/application/use-ca
 import { GetCategoryUseCase } from '../../../core/category/application/use-cases/get-category/get-category.use-case';
 import { ListCategoriesUseCase } from '../../../core/category/application/use-cases/list-categories/list-categories.use-case';
 import { UpdateCategoryUseCase } from '../../../core/category/application/use-cases/update-category/update-category.use-case';
-import { Category } from '../../../core/category/domain/category.entity';
+import {
+  Category,
+  CategoryId,
+} from '../../../core/category/domain/category.aggregate';
 import { ICategoryRepository } from '../../../core/category/domain/category.repository';
-import { Uuid } from '../../../core/shared/domain/value-objects/uuid.vo';
 import { ConfigModule } from '../../config-module/config.module';
 import { DatabaseModule } from '../../database-module/database.module';
 import { CategoriesController } from '../categories.controller';
@@ -63,7 +65,7 @@ describe('CategoriesController Integration Tests', () => {
       'when body is $send_data',
       async ({ send_data, expected }) => {
         const presenter = await controller.create(send_data);
-        const entity = await repository.findById(new Uuid(presenter.id));
+        const entity = await repository.findById(new CategoryId(presenter.id));
         expect(entity?.toJSON()).toStrictEqual({
           category_id: presenter.id,
           created_at: presenter.created_at,
@@ -91,7 +93,7 @@ describe('CategoriesController Integration Tests', () => {
           category.category_id.id,
           send_data,
         );
-        const entity = await repository.findById(new Uuid(presenter.id));
+        const entity = await repository.findById(new CategoryId(presenter.id));
         expect(entity?.toJSON()).toStrictEqual({
           category_id: presenter.id,
           created_at: presenter.created_at,

@@ -1,5 +1,5 @@
+import { CategoryId } from '@core/category/domain/category.aggregate';
 import { NotFoundError } from '../../../../domain/errors/not-found.error';
-import { Uuid } from '../../../../domain/value-objects/uuid.vo';
 import { StubEntity, StubInMemoryRepository } from '../in-memory.stub';
 
 describe('InMemoryRepository Unit Tests', () => {
@@ -11,7 +11,7 @@ describe('InMemoryRepository Unit Tests', () => {
 
   test('should insert a new entity', async () => {
     const entity = new StubEntity({
-      entity_id: new Uuid(),
+      entity_id: new CategoryId(),
       name: 'Test',
       price: 100,
     });
@@ -25,12 +25,12 @@ describe('InMemoryRepository Unit Tests', () => {
   test('should bulk insert entities', async () => {
     const entities = [
       new StubEntity({
-        entity_id: new Uuid(),
+        entity_id: new CategoryId(),
         name: 'Test',
         price: 100,
       }),
       new StubEntity({
-        entity_id: new Uuid(),
+        entity_id: new CategoryId(),
         name: 'Test',
         price: 100,
       }),
@@ -73,16 +73,16 @@ describe('InMemoryRepository Unit Tests', () => {
   });
 
   it('should throws error on delete when entity not found', async () => {
-    const uuid = new Uuid();
+    const uuid = new CategoryId();
     await expect(repo.delete(uuid)).rejects.toThrow(
       new NotFoundError(uuid, StubEntity),
     );
 
     await expect(
-      repo.delete(new Uuid('9366b7dc-2d71-4799-b91c-c64adb205104')),
+      repo.delete(new CategoryId('9366b7dc-2d71-4799-b91c-c64adb205104')),
     ).rejects.toThrow(
       new NotFoundError(
-        new Uuid('9366b7dc-2d71-4799-b91c-c64adb205104'),
+        new CategoryId('9366b7dc-2d71-4799-b91c-c64adb205104'),
         StubEntity,
       ),
     );

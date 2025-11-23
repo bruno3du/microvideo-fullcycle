@@ -2,11 +2,11 @@ import { instanceToPlain } from 'class-transformer';
 import request from 'supertest';
 import { CategoryOutputMapper } from '../../src/core/category/application/use-cases/common/category-output';
 import { ICategoryRepository } from '../../src/core/category/domain/category.repository';
-import { Uuid } from '../../src/core/shared/domain/value-objects/uuid.vo';
 import { CategoriesController } from '../../src/nest-modules/categories-module/categories.controller';
 import { CATEGORY_PROVIDERS } from '../../src/nest-modules/categories-module/categories.providers';
 import { CreateCategoryFixture } from '../../src/nest-modules/categories-module/testing/category-fixture';
 import { startApp } from '../../src/nest-modules/shared-module/testing/helpers';
+import { CategoryId } from '@core/category/domain/category.aggregate';
 
 describe('CategoriesController (e2e)', () => {
   const appHelper = startApp();
@@ -66,7 +66,9 @@ describe('CategoriesController (e2e)', () => {
           expect(Object.keys(res.body)).toStrictEqual(['data']);
           expect(Object.keys(res.body.data)).toStrictEqual(keysInResponse);
           const id = res.body.data.id;
-          const categoryCreated = await categoryRepo.findById(new Uuid(id));
+          const categoryCreated = await categoryRepo.findById(
+            new CategoryId(id),
+          );
 
           const presenter = CategoriesController.serialize(
             CategoryOutputMapper.toOutput(categoryCreated),

@@ -1,30 +1,48 @@
-import { CategoryId } from '@core/category/domain/category.aggregate';
 import { Chance } from 'chance';
-import { Category } from './category.aggregate';
+import { CastMemberType } from './cast-member-type.vo';
+import { CastMember, CastMemberId } from './cast-member.aggregate';
 
 type PropOrFactory<T> = T | ((index: number) => T);
 
-export class CategoryFakeBuilder<TBuild = any> {
+export class CastMemberFakeBuilder<TBuild = any> {
   // auto generated in entity
-  private _category_id: PropOrFactory<CategoryId> | undefined = undefined;
+  private _cast_member_id: PropOrFactory<CastMemberId> | undefined = undefined;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private _name: PropOrFactory<string> = (_index) => this.chance.word();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private _description: PropOrFactory<string | null> = (_index) =>
-    this.chance.paragraph();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private _is_active: PropOrFactory<boolean> = (_index) => true;
+  private _type: PropOrFactory<CastMemberType> = (_index) =>
+    CastMemberType.createAnActor();
   // auto generated in entity
   private _created_at: PropOrFactory<Date> | undefined = undefined;
 
   private countObjs;
 
-  static aCategory() {
-    return new CategoryFakeBuilder<Category>();
+  static aDirector() {
+    return new CastMemberFakeBuilder<CastMember>().withType(
+      CastMemberType.createADirector(),
+    );
   }
 
-  static theCategories(countObjs: number) {
-    return new CategoryFakeBuilder<Category[]>(countObjs);
+  static anActor() {
+    return new CastMemberFakeBuilder<CastMember>().withType(
+      CastMemberType.createAnActor(),
+    );
+  }
+
+  static theActors(countObjs: number) {
+    return new CastMemberFakeBuilder<CastMember[]>(countObjs).withType(
+      CastMemberType.createAnActor(),
+    );
+  }
+
+  static theDirectors(countObjs: number) {
+    return new CastMemberFakeBuilder<CastMember[]>(countObjs).withType(
+      CastMemberType.createADirector(),
+    );
+  }
+
+  static theCastMembers(countObjs: number) {
+    return new CastMemberFakeBuilder<CastMember[]>(countObjs);
   }
 
   private chance: Chance.Chance;
@@ -34,8 +52,8 @@ export class CategoryFakeBuilder<TBuild = any> {
     this.chance = Chance();
   }
 
-  withCategoryId(valueOrFactory: PropOrFactory<CategoryId>) {
-    this._category_id = valueOrFactory;
+  withCastMemberId(valueOrFactory: PropOrFactory<CastMemberId>) {
+    this._cast_member_id = valueOrFactory;
     return this;
   }
 
@@ -44,18 +62,8 @@ export class CategoryFakeBuilder<TBuild = any> {
     return this;
   }
 
-  withDescription(valueOrFactory: PropOrFactory<string | null>) {
-    this._description = valueOrFactory;
-    return this;
-  }
-
-  activate() {
-    this._is_active = true;
-    return this;
-  }
-
-  deactivate() {
-    this._is_active = false;
+  withType(valueOrFactory: PropOrFactory<CastMemberType>) {
+    this._type = valueOrFactory;
     return this;
   }
 
@@ -70,42 +78,35 @@ export class CategoryFakeBuilder<TBuild = any> {
   }
 
   build(): TBuild {
-    const categories = new Array(this.countObjs)
+    const castMembers = new Array(this.countObjs)
       .fill(undefined)
       .map((_, index) => {
-        const category = new Category({
-          category_id: !this._category_id
+        const castMember = new CastMember({
+          cast_member_id: !this._cast_member_id
             ? undefined
-            : this.callFactory(this._category_id, index),
+            : this.callFactory(this._cast_member_id, index),
           name: this.callFactory(this._name, index),
-          description: this.callFactory(this._description, index),
-          is_active: this.callFactory(this._is_active, index),
+          type: this.callFactory(this._type, index),
           ...(this._created_at && {
             created_at: this.callFactory(this._created_at, index),
           }),
         });
-        category.validate();
-        return category;
+        castMember.validate();
+        return castMember;
       });
-    return this.countObjs === 1
-      ? (categories[0] as TBuild)
-      : (categories as unknown as TBuild);
+    return this.countObjs === 1 ? (castMembers[0] as any) : castMembers;
   }
 
-  get category_id() {
-    return this.getValue('category_id');
+  get cast_member_id() {
+    return this.getValue('cast_member_id');
   }
 
   get name() {
     return this.getValue('name');
   }
 
-  get description() {
-    return this.getValue('description');
-  }
-
-  get is_active() {
-    return this.getValue('is_active');
+  get type() {
+    return this.getValue('type');
   }
 
   get created_at() {
@@ -113,7 +114,7 @@ export class CategoryFakeBuilder<TBuild = any> {
   }
 
   private getValue(prop: any) {
-    const optional = ['category_id', 'created_at'];
+    const optional = ['cast_member_id', 'created_at'];
     const privateProp = `_${prop}` as keyof this;
     if (!this[privateProp] && optional.includes(prop)) {
       throw new Error(

@@ -1,3 +1,4 @@
+import { CategoryId } from '@core/category/domain/category.aggregate';
 import { Entity } from '../../../../domain/entity';
 import { SearchParams } from '../../../../domain/repository/search-params';
 import { SearchResult } from '../../../../domain/repository/search-result';
@@ -16,7 +17,7 @@ class StubEntity extends Entity {
   price: number;
   constructor(props: StubEntityConstructorProps) {
     super();
-    this.entity_id = props.entity_id ?? new Uuid();
+    this.entity_id = props.entity_id ?? new CategoryId();
     this.name = props.name;
     this.price = +props.price;
   }
