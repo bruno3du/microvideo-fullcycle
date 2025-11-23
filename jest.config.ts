@@ -203,6 +203,10 @@ const config: Config = {
   transform: {
     '^.+\\.(t|j)s$': '@swc/jest',
   },
+  moduleNameMapper: {
+    '@core/(.*)': '<rootDir>/core/$1',
+    '@nest-modules/(.*)': '<rootDir>/nest-modules/$1',
+  },
   collectCoverageFrom: ['**/*.(t|j)s'],
   coverageDirectory: '../coverage',
   coveragePathIgnorePatterns: [
