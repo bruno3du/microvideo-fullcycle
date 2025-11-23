@@ -19,4 +19,34 @@ describe('CategoryOutputMapper Unit Tests', () => {
       created_at: entity.created_at,
     });
   });
+
+  it('should convert a category in output without description', () => {
+    const entity = Category.create({
+      name: 'Movie',
+      description: null,
+      is_active: true,
+    });
+    const output = CategoryOutputMapper.toOutput(entity);
+    expect(output).toStrictEqual({
+      id: entity.category_id.id,
+      name: 'Movie',
+      description: null,
+      is_active: true,
+      created_at: entity.created_at,
+    });
+  });
+
+  it('should convert a category in output without is_active', () => {
+    const entity = Category.create({
+      name: 'Movie',
+    });
+    const output = CategoryOutputMapper.toOutput(entity);
+    expect(output).toStrictEqual({
+      id: entity.category_id.id,
+      name: 'Movie',
+      description: null,
+      is_active: true,
+      created_at: entity.created_at,
+    });
+  });
 });

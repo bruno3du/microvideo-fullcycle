@@ -1,3 +1,5 @@
+process.env.NODE_ENV = 'test';
+
 import { Notification } from '../../domain/validators/notification';
 
 expect.extend({

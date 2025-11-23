@@ -36,8 +36,7 @@
 				"dbaeumer.vscode-eslint",
 				"eamodio.gitlens",
 				"natqe.reload",
-				"orta.vscode-jest",
-				"postman.postman-for-vscode"
+				"orta.vscode-jest"
 			]
 		}
 	}

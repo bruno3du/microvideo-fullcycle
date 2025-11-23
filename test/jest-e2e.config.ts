@@ -10,6 +10,10 @@ const config: Config = {
   transform: {
     '^.+\\.(t|j)s$': '@swc/jest',
   },
+  moduleNameMapper: {
+    '@core/(.*)': '<rootDir>/../src/core/$1',
+    '@nest-modules/(.*)': '<rootDir>/../src/nest-modules/$1',
+  },
   setupFilesAfterEnv: ['./jest-setup.ts'],
 };
 

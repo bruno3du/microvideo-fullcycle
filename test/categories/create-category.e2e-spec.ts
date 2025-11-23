@@ -1,13 +1,12 @@
-import { CategoryOutputMapper } from '@core/category/application/use-cases/common/category-output';
-import { Category } from '@core/category/domain/category.entity';
-import { ICategoryRepository } from '@core/category/domain/category.repository';
-import { Uuid } from '@core/shared/domain/value-objects/uuid.vo';
-import { CategoriesController } from '@nest-modules/categories-module/categories.controller';
-import { CATEGORY_PROVIDERS } from '@nest-modules/categories-module/categories.providers';
-import { CreateCategoryFixture } from '@nest-modules/categories-module/testing/category-fixture';
-import { startApp } from '@nest-modules/shared-module/testing/helpers';
 import { instanceToPlain } from 'class-transformer';
 import request from 'supertest';
+import { CategoryOutputMapper } from '../../src/core/category/application/use-cases/common/category-output';
+import { ICategoryRepository } from '../../src/core/category/domain/category.repository';
+import { Uuid } from '../../src/core/shared/domain/value-objects/uuid.vo';
+import { CategoriesController } from '../../src/nest-modules/categories-module/categories.controller';
+import { CATEGORY_PROVIDERS } from '../../src/nest-modules/categories-module/categories.providers';
+import { CreateCategoryFixture } from '../../src/nest-modules/categories-module/testing/category-fixture';
+import { startApp } from '../../src/nest-modules/shared-module/testing/helpers';
 
 describe('CategoriesController (e2e)', () => {
   const appHelper = startApp();
@@ -18,7 +17,6 @@ describe('CategoriesController (e2e)', () => {
       CATEGORY_PROVIDERS.REPOSITORIES.CATEGORY_REPOSITORY.provide,
     );
   });
-
   describe('/categories (POST)', () => {
     describe('should return a response error with 422 status code when request body is invalid', () => {
       const invalidRequest = CreateCategoryFixture.arrangeInvalidRequest();
@@ -71,7 +69,7 @@ describe('CategoriesController (e2e)', () => {
           const categoryCreated = await categoryRepo.findById(new Uuid(id));
 
           const presenter = CategoriesController.serialize(
-            CategoryOutputMapper.toOutput(categoryCreated as Category),
+            CategoryOutputMapper.toOutput(categoryCreated),
           );
           const serialized = instanceToPlain(presenter);
 

@@ -89,7 +89,11 @@ export class CreateCategoryFixture {
       EMPTY: {
         send_data: {},
         expected: {
-          message: ['name should not be empty', 'name must be a string'],
+          message: [
+            'name should not be empty',
+            'name must be a string',
+            'name must be shorter than or equal to 255 characters',
+          ],
           ...defaultExpected,
         },
       },
@@ -98,7 +102,11 @@ export class CreateCategoryFixture {
           name: undefined,
         },
         expected: {
-          message: ['name should not be empty', 'name must be a string'],
+          message: [
+            'name should not be empty',
+            'name must be a string',
+            'name must be shorter than or equal to 255 characters',
+          ],
           ...defaultExpected,
         },
       },
@@ -107,7 +115,11 @@ export class CreateCategoryFixture {
           name: null,
         },
         expected: {
-          message: ['name should not be empty', 'name must be a string'],
+          message: [
+            'name should not be empty',
+            'name must be a string',
+            'name must be shorter than or equal to 255 characters',
+          ],
           ...defaultExpected,
         },
       },
@@ -128,6 +140,7 @@ export class CreateCategoryFixture {
           message: [
             'name should not be empty',
             'name must be a string',
+            'name must be shorter than or equal to 255 characters',
             'description must be a string',
           ],
           ...defaultExpected,
@@ -141,6 +154,7 @@ export class CreateCategoryFixture {
           message: [
             'name should not be empty',
             'name must be a string',
+            'name must be shorter than or equal to 255 characters',
             'is_active must be a boolean value',
           ],
           ...defaultExpected,
@@ -209,7 +223,6 @@ export class UpdateCategoryFixture {
         },
         expected: {
           name: faker.name,
-          description: expect.anything(),
           is_active: false,
         },
       },

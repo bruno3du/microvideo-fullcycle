@@ -3,6 +3,7 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  MaxLength,
   validateSync,
 } from 'class-validator';
 
@@ -13,6 +14,7 @@ export type CreateCategoryInputConstructorProps = {
 };
 
 export class CreateCategoryInput {
+  @MaxLength(255)
   @IsString()
   @IsNotEmpty()
   name: string;

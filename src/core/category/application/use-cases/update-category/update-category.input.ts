@@ -3,6 +3,7 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  MaxLength,
   validateSync,
 } from 'class-validator';
 
@@ -18,6 +19,7 @@ export class UpdateCategoryInput {
   @IsNotEmpty()
   id: string;
 
+  @MaxLength(255)
   @IsString()
   @IsOptional()
   name?: string;
