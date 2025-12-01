@@ -10,8 +10,8 @@ export type CategoryModelProps = {
   category_id: string;
   name: string;
   description: string | null;
-  is_active: boolean;
-  created_at: Date;
+  is_active?: boolean;
+  created_at?: Date;
 };
 
 @Table({ tableName: 'categories', timestamps: false })
@@ -26,9 +26,13 @@ export class CategoryModel extends Model<CategoryModelProps> {
   @Column({ allowNull: true, type: DataType.TEXT })
   declare description: string | null;
 
-  @Column({ allowNull: false, type: DataType.BOOLEAN })
+  @Column({ allowNull: false, type: DataType.BOOLEAN, defaultValue: true })
   declare is_active: boolean;
 
-  @Column({ allowNull: false, type: DataType.DATE(3) })
+  @Column({
+    allowNull: false,
+    type: DataType.DATE(3),
+    defaultValue: new Date(),
+  })
   declare created_at: Date;
 }

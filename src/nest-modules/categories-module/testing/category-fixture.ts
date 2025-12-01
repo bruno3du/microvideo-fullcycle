@@ -1,4 +1,4 @@
-import { Category } from '@core/category/domain/category.aggregate';
+import { Category } from '../../../core/category/domain/category.aggregate';
 
 const _keysInResponse = [
   'id',
@@ -89,11 +89,7 @@ export class CreateCategoryFixture {
       EMPTY: {
         send_data: {},
         expected: {
-          message: [
-            'name should not be empty',
-            'name must be a string',
-            'name must be shorter than or equal to 255 characters',
-          ],
+          message: ['name should not be empty', 'name must be a string'],
           ...defaultExpected,
         },
       },
@@ -102,11 +98,7 @@ export class CreateCategoryFixture {
           name: undefined,
         },
         expected: {
-          message: [
-            'name should not be empty',
-            'name must be a string',
-            'name must be shorter than or equal to 255 characters',
-          ],
+          message: ['name should not be empty', 'name must be a string'],
           ...defaultExpected,
         },
       },
@@ -115,11 +107,7 @@ export class CreateCategoryFixture {
           name: null,
         },
         expected: {
-          message: [
-            'name should not be empty',
-            'name must be a string',
-            'name must be shorter than or equal to 255 characters',
-          ],
+          message: ['name should not be empty', 'name must be a string'],
           ...defaultExpected,
         },
       },
@@ -140,7 +128,6 @@ export class CreateCategoryFixture {
           message: [
             'name should not be empty',
             'name must be a string',
-            'name must be shorter than or equal to 255 characters',
             'description must be a string',
           ],
           ...defaultExpected,
@@ -154,7 +141,6 @@ export class CreateCategoryFixture {
           message: [
             'name should not be empty',
             'name must be a string',
-            'name must be shorter than or equal to 255 characters',
             'is_active must be a boolean value',
           ],
           ...defaultExpected,

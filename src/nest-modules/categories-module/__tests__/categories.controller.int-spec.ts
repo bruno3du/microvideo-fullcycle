@@ -1,6 +1,4 @@
-import { getConnectionToken } from '@nestjs/sequelize';
 import { Test, TestingModule } from '@nestjs/testing';
-import { Sequelize } from 'sequelize-typescript';
 import { CategoryOutputMapper } from '../../../core/category/application/use-cases/common/category-output';
 import { CreateCategoryUseCase } from '../../../core/category/application/use-cases/create-category/create-category.use-case';
 import { DeleteCategoryUseCase } from '../../../core/category/application/use-cases/delete-category/delete-category.use-case';
@@ -30,24 +28,15 @@ import {
 describe('CategoriesController Integration Tests', () => {
   let controller: CategoriesController;
   let repository: ICategoryRepository;
-  let module: TestingModule;
-  let sequelize: Sequelize;
 
   beforeEach(async () => {
-    module = await Test.createTestingModule({
+    const module: TestingModule = await Test.createTestingModule({
       imports: [ConfigModule.forRoot(), DatabaseModule, CategoriesModule],
     }).compile();
     controller = module.get<CategoriesController>(CategoriesController);
     repository = module.get<ICategoryRepository>(
       CATEGORY_PROVIDERS.REPOSITORIES.CATEGORY_REPOSITORY.provide,
     );
-    sequelize = module.get<Sequelize>(getConnectionToken());
-  });
-
-  afterEach(async () => {
-    if (sequelize) {
-      await sequelize.close();
-    }
   });
 
   it('should be defined', () => {
@@ -66,7 +55,7 @@ describe('CategoriesController Integration Tests', () => {
       async ({ send_data, expected }) => {
         const presenter = await controller.create(send_data);
         const entity = await repository.findById(new CategoryId(presenter.id));
-        expect(entity?.toJSON()).toStrictEqual({
+        expect(entity!.toJSON()).toStrictEqual({
           category_id: presenter.id,
           created_at: presenter.created_at,
           ...expected,
@@ -94,7 +83,7 @@ describe('CategoriesController Integration Tests', () => {
           send_data,
         );
         const entity = await repository.findById(new CategoryId(presenter.id));
-        expect(entity?.toJSON()).toStrictEqual({
+        expect(entity!.toJSON()).toStrictEqual({
           category_id: presenter.id,
           created_at: presenter.created_at,
           name: expected.name ?? category.name,
