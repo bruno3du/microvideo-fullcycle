@@ -2,7 +2,7 @@ import {
   CastMember,
   CastMemberId,
 } from '@core/cast-member/domain/cast-member.aggregate';
-import { CastMemberInMemoryRepository } from '@core/cast-member/infra/db/in-memory/cast-member-in-memory.repository.spec';
+import { CastMemberInMemoryRepository } from '@core/cast-member/infra/db/in-memory/cast-member-in-memory.repository';
 import { NotFoundError } from '@core/shared/domain/errors/not-found.error';
 import { DeleteCastMemberUseCase } from '../delete-cast-member.use-case';
 
