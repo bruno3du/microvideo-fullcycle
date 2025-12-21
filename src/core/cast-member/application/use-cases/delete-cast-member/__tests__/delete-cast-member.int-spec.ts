@@ -5,7 +5,7 @@ import {
 import {
   CastMemberModel,
   CastMemberSequelizeRepository,
-} from '@core/cast-member/infra/db/sequelize/cast-member-sequelize.repository';
+} from '@core/cast-member/infra/db/sequelize/cast-member-sequelize';
 import { NotFoundError } from '@core/shared/domain/errors/not-found.error';
 import { setupSequelize } from '@core/shared/infra/testing/helpers';
 import { DeleteCastMemberUseCase } from '../delete-cast-member.use-case';

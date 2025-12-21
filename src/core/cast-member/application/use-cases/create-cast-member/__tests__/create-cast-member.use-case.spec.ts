@@ -1,6 +1,6 @@
 import { CreateCastMemberInput } from '@core/cast-member/application/use-cases/create-cast-member/create-cast-member.input';
 import { CastMemberTypes } from '@core/cast-member/domain/cast-member-type.vo';
-import { CastMemberInMemoryRepository } from '@core/cast-member/infra/db/in-memory/cast-member-in-memory.repository.spec';
+import { CastMemberInMemoryRepository } from '@core/cast-member/infra/db/in-memory/cast-member-in-memory.repository';
 import { EntityValidationError } from '@core/shared/domain/validators/validation.error';
 import { CreateCastMemberUseCase } from '../create-cast-member.use-case';
 

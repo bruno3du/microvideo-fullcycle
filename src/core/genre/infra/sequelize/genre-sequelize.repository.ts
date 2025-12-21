@@ -1,8 +1,8 @@
-import { IUnitOfWork } from '@core/shared/domain/repository/unit-of-work.interface';
 import { Op, literal } from 'sequelize';
 import { InvalidArgumentError } from '../../../shared/domain/errors/invalid-argument.error';
 import { NotFoundError } from '../../../shared/domain/errors/not-found.error';
 import { SortDirection } from '../../../shared/domain/repository/search-params';
+import { UnitOfWorkSequelize } from '../../../shared/infra/db/sequelize/unit-of-work-sequelize';
 import { Genre, GenreId } from '../../domain/genre.aggregate';
 import {
   GenreSearchParams,
@@ -22,7 +22,7 @@ export class GenreSequelizeRepository implements IGenreRepository {
   };
   constructor(
     private genreModel: typeof GenreModel,
-    private uow: IUnitOfWork,
+    private uow: UnitOfWorkSequelize,
   ) {}
 
   async insert(entity: Genre): Promise<void> {
@@ -106,6 +106,9 @@ export class GenreSequelizeRepository implements IGenreRepository {
     await model.$remove(
       'categories',
       model.categories_id.map((c) => c.category_id),
+      {
+        transaction: this.uow.getTransaction(),
+      },
     );
     const { categories_id, ...props } =
       GenreModelMapper.toModelProps(aggregate);
@@ -116,6 +119,9 @@ export class GenreSequelizeRepository implements IGenreRepository {
     await model.$add(
       'categories',
       categories_id.map((c) => c.category_id),
+      {
+        transaction: this.uow.getTransaction(),
+      },
     );
   }
 
@@ -197,6 +203,7 @@ export class GenreSequelizeRepository implements IGenreRepository {
         (i) => i,
       ),
       where: wheres.length ? { [Op.and]: wheres.map((w) => w.condition) } : {},
+      transaction: this.uow.getTransaction(),
     });
 
     const columnOrder = orderBy.replace('binary', '').trim().split(' ')[0];
@@ -222,6 +229,7 @@ export class GenreSequelizeRepository implements IGenreRepository {
           (acc, w) => ({ ...acc, [w.field]: w.value }),
           {},
         ),
+        transaction: this.uow.getTransaction(),
       },
     );
 
