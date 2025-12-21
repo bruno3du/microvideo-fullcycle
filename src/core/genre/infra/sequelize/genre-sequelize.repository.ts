@@ -1,3 +1,4 @@
+import { IUnitOfWork } from '@core/shared/domain/repository/unit-of-work.interface';
 import { Op, literal } from 'sequelize';
 import { InvalidArgumentError } from '../../../shared/domain/errors/invalid-argument.error';
 import { NotFoundError } from '../../../shared/domain/errors/not-found.error';
@@ -19,11 +20,15 @@ export class GenreSequelizeRepository implements IGenreRepository {
         `binary ${this.genreModel.name}.name ${sort_dir}`,
     },
   };
-  constructor(private genreModel: typeof GenreModel) {}
+  constructor(
+    private genreModel: typeof GenreModel,
+    private uow: IUnitOfWork,
+  ) {}
 
   async insert(entity: Genre): Promise<void> {
     await this.genreModel.create(GenreModelMapper.toModelProps(entity), {
       include: ['categories_id'],
+      transaction: this.uow.getTransaction(),
     });
   }
 
@@ -31,6 +36,7 @@ export class GenreSequelizeRepository implements IGenreRepository {
     const models = entities.map((e) => GenreModelMapper.toModelProps(e));
     await this.genreModel.bulkCreate(models, {
       include: ['categories_id'],
+      transaction: this.uow.getTransaction(),
     });
   }
 
@@ -42,6 +48,7 @@ export class GenreSequelizeRepository implements IGenreRepository {
   async findAll(): Promise<Genre[]> {
     const models = await this.genreModel.findAll({
       include: ['categories_id'],
+      transaction: this.uow.getTransaction(),
     });
     return models.map((m) => GenreModelMapper.toEntity(m));
   }
@@ -54,6 +61,7 @@ export class GenreSequelizeRepository implements IGenreRepository {
         },
       },
       include: ['categories_id'],
+      transaction: this.uow.getTransaction(),
     });
     return models.map((m) => GenreModelMapper.toEntity(m));
   }
@@ -74,6 +82,7 @@ export class GenreSequelizeRepository implements IGenreRepository {
           [Op.in]: ids.map((id) => id.id),
         },
       },
+      transaction: this.uow.getTransaction(),
     });
     const existsGenreIds = existsGenreModels.map(
       (m) => new GenreId(m.genre_id),
@@ -102,6 +111,7 @@ export class GenreSequelizeRepository implements IGenreRepository {
       GenreModelMapper.toModelProps(aggregate);
     await this.genreModel.update(props, {
       where: { genre_id: aggregate.genre_id.id },
+      transaction: this.uow.getTransaction(),
     });
     await model.$add(
       'categories',
@@ -114,9 +124,11 @@ export class GenreSequelizeRepository implements IGenreRepository {
       this.genreModel.associations.categories_id.target;
     await genreCategoryRelation.destroy({
       where: { genre_id: id.id },
+      transaction: this.uow.getTransaction(),
     });
     const affectedRows = await this.genreModel.destroy({
       where: { genre_id: id.id },
+      transaction: this.uow.getTransaction(),
     });
 
     if (affectedRows !== 1) {
@@ -127,6 +139,7 @@ export class GenreSequelizeRepository implements IGenreRepository {
   private async _get(id: string): Promise<GenreModel | null> {
     return this.genreModel.findByPk(id, {
       include: ['categories_id'],
+      transaction: this.uow.getTransaction(),
     });
   }
 
@@ -222,6 +235,7 @@ export class GenreSequelizeRepository implements IGenreRepository {
       },
       include: ['categories_id'],
       order: literal(orderBy),
+      transaction: this.uow.getTransaction(),
     });
 
     return new GenreSearchResult({
