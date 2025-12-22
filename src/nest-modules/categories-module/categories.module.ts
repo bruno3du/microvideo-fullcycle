@@ -11,5 +11,10 @@ import { CATEGORY_PROVIDERS } from './categories.providers';
     ...Object.values(CATEGORY_PROVIDERS.REPOSITORIES),
     ...Object.values(CATEGORY_PROVIDERS.USE_CASES),
   ],
+  exports: [
+    CATEGORY_PROVIDERS.REPOSITORIES.CATEGORY_REPOSITORY.provide,
+    CATEGORY_PROVIDERS.VALIDATIONS.CATEGORIES_IDS_EXISTS_IN_DATABASE_VALIDATOR
+      .provide,
+  ],
 })
 export class CategoriesModule {}
