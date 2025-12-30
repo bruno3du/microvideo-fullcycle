@@ -1,3 +1,4 @@
+import { VideoFakeBuilder } from '@core/video/domain/video-faker.builder';
 import { CastMemberId } from '../../cast-member/domain/cast-member.aggregate';
 import { CategoryId } from '../../category/domain/category.aggregate';
 import { GenreId } from '../../genre/domain/genre.aggregate';
@@ -227,10 +228,9 @@ export class Video extends AggregateRoot {
     return validator.validate(this.notification, this, fields);
   }
 
-  //   static fake() {
-  //     return VideoFakeBuilder;
-  //   }
-
+  static fake() {
+    return VideoFakeBuilder;
+  }
   get entity_id() {
     return this.video_id;
   }
