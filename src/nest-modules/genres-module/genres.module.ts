@@ -1,7 +1,7 @@
 import {
   GenreCategoryModel,
   GenreModel,
-} from '@core/genre/infra/sequelize/genre-model';
+} from '../../core/genre/infra/db/sequelize/genre-model';
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { CategoriesModule } from '../categories-module/categories.module';

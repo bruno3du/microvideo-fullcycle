@@ -8,8 +8,8 @@ import { ListGenresUseCase } from '../../core/genre/application/use-cases/list-g
 import { UpdateGenreUseCase } from '../../core/genre/application/use-cases/update-genre/update-genre.use-case';
 import { IGenreRepository } from '../../core/genre/domain/genre.repository';
 import { GenreInMemoryRepository } from '../../core/genre/infra/db/in-memory/genre-in-memory.repository';
-import { GenreModel } from '../../core/genre/infra/sequelize/genre-model';
-import { GenreSequelizeRepository } from '../../core/genre/infra/sequelize/genre-sequelize.repository';
+import { GenreModel } from '../../core/genre/infra/db/sequelize/genre-model';
+import { GenreSequelizeRepository } from '../../core/genre/infra/db/sequelize/genre-sequelize.repository';
 import { IUnitOfWork } from '../../core/shared/domain/repository/unit-of-work.interface';
 import { UnitOfWorkSequelize } from '../../core/shared/infra/db/sequelize/unit-of-work-sequelize';
 import { CATEGORY_PROVIDERS } from '../categories-module/categories.providers';
