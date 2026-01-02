@@ -1,8 +1,3 @@
-import {
-  GenreCategoryModel,
-  GenreModel,
-} from '@core/genre/infra/sequelize/genre-model';
-import { GenreSequelizeRepository } from '@core/genre/infra/sequelize/genre-sequelize.repository';
 import { Category } from '../../../../../category/domain/category.aggregate';
 import { CategorySequelizeRepository } from '../../../../../category/infra/db/sequelize/category-sequelize.repository';
 import { CategoryModel } from '../../../../../category/infra/db/sequelize/category.model';
@@ -10,6 +5,11 @@ import { NotFoundError } from '../../../../../shared/domain/errors/not-found.err
 import { UnitOfWorkSequelize } from '../../../../../shared/infra/db/sequelize/unit-of-work-sequelize';
 import { setupSequelize } from '../../../../../shared/infra/testing/helpers';
 import { Genre, GenreId } from '../../../../domain/genre.aggregate';
+import {
+  GenreCategoryModel,
+  GenreModel,
+} from '../../../../infra/db/sequelize/genre-model';
+import { GenreSequelizeRepository } from '../../../../infra/db/sequelize/genre-sequelize.repository';
 import { GetGenreUseCase } from '../get-genre.use-case';
 
 describe('GetGenreUseCase Integration Tests', () => {

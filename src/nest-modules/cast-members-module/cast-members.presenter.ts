@@ -23,10 +23,6 @@ export class CastMemberPresenter {
 
 export class CastMemberCollectionPresenter extends CollectionPresenter {
   data: CastMemberPresenter[];
-  //sugestão de reuso
-  // constructor(output: CastMemberOutput[], paginationProps){
-
-  // }
 
   constructor(output: ListCastMembersOutput) {
     const { items, ...paginationProps } = output;

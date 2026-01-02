@@ -1,8 +1,3 @@
-import {
-  GenreCategoryModel,
-  GenreModel,
-} from '@core/genre/infra/sequelize/genre-model';
-import { GenreSequelizeRepository } from '@core/genre/infra/sequelize/genre-sequelize.repository';
 import { DatabaseError } from 'sequelize';
 import { CategoriesIdExistsInDatabaseValidator } from '../../../../../category/application/validations/categories-ids-exists-in-database.validator';
 import { Category } from '../../../../../category/domain/category.aggregate';
@@ -11,6 +6,11 @@ import { CategoryModel } from '../../../../../category/infra/db/sequelize/catego
 import { UnitOfWorkSequelize } from '../../../../../shared/infra/db/sequelize/unit-of-work-sequelize';
 import { setupSequelize } from '../../../../../shared/infra/testing/helpers';
 import { Genre, GenreId } from '../../../../domain/genre.aggregate';
+import {
+  GenreCategoryModel,
+  GenreModel,
+} from '../../../../infra/db/sequelize/genre-model';
+import { GenreSequelizeRepository } from '../../../../infra/db/sequelize/genre-sequelize.repository';
 import { CreateGenreUseCase } from '../create-genre.use-case';
 
 describe('CreateGenreUseCase Integration Tests', () => {

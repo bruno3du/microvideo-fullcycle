@@ -1,14 +1,14 @@
 import { Op, literal } from 'sequelize';
-import { InvalidArgumentError } from '../../../shared/domain/errors/invalid-argument.error';
-import { NotFoundError } from '../../../shared/domain/errors/not-found.error';
-import { SortDirection } from '../../../shared/domain/repository/search-params';
-import { UnitOfWorkSequelize } from '../../../shared/infra/db/sequelize/unit-of-work-sequelize';
-import { Genre, GenreId } from '../../domain/genre.aggregate';
+import { InvalidArgumentError } from '../../../../shared/domain/errors/invalid-argument.error';
+import { NotFoundError } from '../../../../shared/domain/errors/not-found.error';
+import { SortDirection } from '../../../../shared/domain/repository/search-params';
+import { UnitOfWorkSequelize } from '../../../../shared/infra/db/sequelize/unit-of-work-sequelize';
+import { Genre, GenreId } from '../../../domain/genre.aggregate';
 import {
   GenreSearchParams,
   GenreSearchResult,
   IGenreRepository,
-} from '../../domain/genre.repository';
+} from '../../../domain/genre.repository';
 import { GenreModel } from './genre-model';
 import { GenreModelMapper } from './genre-model-mapper';
 

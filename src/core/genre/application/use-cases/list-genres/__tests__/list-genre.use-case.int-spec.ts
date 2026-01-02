@@ -1,8 +1,8 @@
 import {
   GenreCategoryModel,
   GenreModel,
-} from '@core/genre/infra/sequelize/genre-model';
-import { GenreSequelizeRepository } from '@core/genre/infra/sequelize/genre-sequelize.repository';
+} from '@core/genre/infra/db/sequelize/genre-model';
+import { GenreSequelizeRepository } from '@core/genre/infra/db/sequelize/genre-sequelize.repository';
 import { Category } from '../../../../../category/domain/category.aggregate';
 import { CategorySequelizeRepository } from '../../../../../category/infra/db/sequelize/category-sequelize.repository';
 import { CategoryModel } from '../../../../../category/infra/db/sequelize/category.model';

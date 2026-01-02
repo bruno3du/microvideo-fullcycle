@@ -1,14 +1,14 @@
-import { Category } from '../../../../category/domain/category.aggregate';
-import { CategorySequelizeRepository } from '../../../../category/infra/db/sequelize/category-sequelize.repository';
-import { CategoryModel } from '../../../../category/infra/db/sequelize/category.model';
-import { NotFoundError } from '../../../../shared/domain/errors/not-found.error';
-import { UnitOfWorkSequelize } from '../../../../shared/infra/db/sequelize/unit-of-work-sequelize';
-import { setupSequelize } from '../../../../shared/infra/testing/helpers';
-import { Genre, GenreId } from '../../../domain/genre.aggregate';
+import { Category } from '../../../../../category/domain/category.aggregate';
+import { CategorySequelizeRepository } from '../../../../../category/infra/db/sequelize/category-sequelize.repository';
+import { CategoryModel } from '../../../../../category/infra/db/sequelize/category.model';
+import { NotFoundError } from '../../../../../shared/domain/errors/not-found.error';
+import { UnitOfWorkSequelize } from '../../../../../shared/infra/db/sequelize/unit-of-work-sequelize';
+import { setupSequelize } from '../../../../../shared/infra/testing/helpers';
+import { Genre, GenreId } from '../../../../domain/genre.aggregate';
 import {
   GenreSearchParams,
   GenreSearchResult,
-} from '../../../domain/genre.repository';
+} from '../../../../domain/genre.repository';
 import { GenreCategoryModel, GenreModel } from '../genre-model';
 import { GenreModelMapper } from '../genre-model-mapper';
 import { GenreSequelizeRepository } from '../genre-sequelize.repository';

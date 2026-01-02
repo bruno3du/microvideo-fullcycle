@@ -1,8 +1,8 @@
 import { DataType } from 'sequelize-typescript';
-import { Category } from '../../../../category/domain/category.aggregate';
-import { CategorySequelizeRepository } from '../../../../category/infra/db/sequelize/category-sequelize.repository';
-import { CategoryModel } from '../../../../category/infra/db/sequelize/category.model';
-import { setupSequelize } from '../../../../shared/infra/testing/helpers';
+import { Category } from '../../../../../category/domain/category.aggregate';
+import { CategorySequelizeRepository } from '../../../../../category/infra/db/sequelize/category-sequelize.repository';
+import { CategoryModel } from '../../../../../category/infra/db/sequelize/category.model';
+import { setupSequelize } from '../../../../../shared/infra/testing/helpers';
 import { GenreCategoryModel, GenreModel } from '../genre-model';
 
 describe('GenreCategoryModel Integration Tests', () => {
