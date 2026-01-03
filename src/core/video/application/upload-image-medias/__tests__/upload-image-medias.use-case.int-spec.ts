@@ -1,24 +1,23 @@
+import { Storage as GoogleCloudStorageSdk } from '@google-cloud/storage';
+import { CastMember } from '../../../../cast-member/domain/cast-member.aggregate';
 import { ICastMemberRepository } from '../../../../cast-member/domain/cast-member.repository';
 import {
   CastMemberModel,
   CastMemberSequelizeRepository,
 } from '../../../../cast-member/infra/db/sequelize/cast-member-sequelize';
+import { Category } from '../../../../category/domain/category.aggregate';
 import { ICategoryRepository } from '../../../../category/domain/category.repository';
 import { CategorySequelizeRepository } from '../../../../category/infra/db/sequelize/category-sequelize.repository';
 import { CategoryModel } from '../../../../category/infra/db/sequelize/category.model';
+import { Genre } from '../../../../genre/domain/genre.aggregate';
 import { IGenreRepository } from '../../../../genre/domain/genre.repository';
 import { GenreModel } from '../../../../genre/infra/db/sequelize/genre-model';
 import { GenreSequelizeRepository } from '../../../../genre/infra/db/sequelize/genre-sequelize.repository';
 import { IStorage } from '../../../../shared/application/storage.interface';
-import { UnitOfWorkSequelize } from '../../../../shared/infra/db/sequelize/unit-of-work-sequelize';
-//import { InMemoryStorage } from '../../../../shared/infra/storage/in-memory.storage';
-import { Storage as GoogleCloudStorageSdk } from '@google-cloud/storage';
-import { CastMember } from '../../../../cast-member/domain/cast-member.aggregate';
-import { Category } from '../../../../category/domain/category.aggregate';
-import { Genre } from '../../../../genre/domain/genre.aggregate';
 import { NotFoundError } from '../../../../shared/domain/errors/not-found.error';
 import { EntityValidationError } from '../../../../shared/domain/validators/validation.error';
 import { Config } from '../../../../shared/infra/config';
+import { UnitOfWorkSequelize } from '../../../../shared/infra/db/sequelize/unit-of-work-sequelize';
 import { GoogleCloudStorage } from '../../../../shared/infra/storage/google-cloud.storage';
 import { Video } from '../../../domain/video.aggregate';
 import { IVideoRepository } from '../../../domain/video.repository';
