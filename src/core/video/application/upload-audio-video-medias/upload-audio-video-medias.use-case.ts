@@ -7,7 +7,7 @@ import { Trailer } from '../../domain/trailer.vo';
 import { VideoMedia } from '../../domain/video-media.vo';
 import { Video, VideoId } from '../../domain/video.aggregate';
 import { IVideoRepository } from '../../domain/video.repository';
-import { UploadAudioVideoMediaInput } from './upload-audio-video-media.input';
+import { UploadAudioVideoMediaInput } from './upload-audio-video-medias.input';
 
 export class UploadAudioVideoMediasUseCase
   implements IUseCase<UploadAudioVideoMediaInput, UploadAudioVideoMediaOutput>

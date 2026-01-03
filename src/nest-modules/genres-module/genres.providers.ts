@@ -1,3 +1,4 @@
+import { GenresIdExistsInDatabaseValidator } from '@core/genre/application/validations/genres-ids-exists-in-database.validator';
 import { getModelToken } from '@nestjs/sequelize';
 import { CategoriesIdExistsInDatabaseValidator } from '../../core/category/application/validations/categories-ids-exists-in-database.validator';
 import { ICategoryRepository } from '../../core/category/domain/category.repository';
@@ -114,7 +115,18 @@ export const USE_CASES = {
   },
 };
 
+export const VALIDATIONS = {
+  GENRES_IDS_EXISTS_IN_DATABASE_VALIDATOR: {
+    provide: CategoriesIdExistsInDatabaseValidator,
+    useFactory: (genreRepo: IGenreRepository) => {
+      return new GenresIdExistsInDatabaseValidator(genreRepo);
+    },
+    inject: [REPOSITORIES.GENRE_REPOSITORY.provide],
+  },
+};
+
 export const GENRES_PROVIDERS = {
   REPOSITORIES,
   USE_CASES,
+  VALIDATIONS,
 };

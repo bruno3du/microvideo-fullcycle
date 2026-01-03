@@ -1,3 +1,4 @@
+import { CastMembersIdExistsInDatabaseValidator } from '@core/cast-member/application/validations/cast-members-ids-exists-in-database.validator';
 import { getModelToken } from '@nestjs/sequelize';
 import { CreateCastMemberUseCase } from '../../core/cast-member/application/use-cases/create-cast-member/create-cast-member.use-case';
 import { DeleteCastMemberUseCase } from '../../core/cast-member/application/use-cases/delete-cast-member/delete-cast-member.use-case';
@@ -67,7 +68,18 @@ export const USE_CASES = {
   },
 };
 
+export const VALIDATIONS = {
+  CAST_MEMBERS_IDS_EXISTS_IN_DATABASE_VALIDATOR: {
+    provide: CastMembersIdExistsInDatabaseValidator,
+    useFactory: (castMemberRepo: ICastMemberRepository) => {
+      return new CastMembersIdExistsInDatabaseValidator(castMemberRepo);
+    },
+    inject: [REPOSITORIES.CAST_MEMBER_REPOSITORY.provide],
+  },
+};
+
 export const CAST_MEMBERS_PROVIDERS = {
   REPOSITORIES,
   USE_CASES,
+  VALIDATIONS,
 };
