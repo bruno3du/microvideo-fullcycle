@@ -1,30 +1,31 @@
 import { Storage as GoogleCloudStorageSdk } from '@google-cloud/storage';
-import { CastMember } from '../../../../cast-member/domain/cast-member.aggregate';
-import { ICastMemberRepository } from '../../../../cast-member/domain/cast-member.repository';
+import { CastMember } from '../../../../../cast-member/domain/cast-member.aggregate';
+import { ICastMemberRepository } from '../../../../../cast-member/domain/cast-member.repository';
 import {
   CastMemberModel,
   CastMemberSequelizeRepository,
-} from '../../../../cast-member/infra/db/sequelize/cast-member-sequelize';
-import { Category } from '../../../../category/domain/category.aggregate';
-import { ICategoryRepository } from '../../../../category/domain/category.repository';
-import { CategorySequelizeRepository } from '../../../../category/infra/db/sequelize/category-sequelize.repository';
-import { CategoryModel } from '../../../../category/infra/db/sequelize/category.model';
-import { Genre } from '../../../../genre/domain/genre.aggregate';
-import { IGenreRepository } from '../../../../genre/domain/genre.repository';
-import { GenreModel } from '../../../../genre/infra/db/sequelize/genre-model';
-import { GenreSequelizeRepository } from '../../../../genre/infra/db/sequelize/genre-sequelize.repository';
-import { IStorage } from '../../../../shared/application/storage.interface';
-import { NotFoundError } from '../../../../shared/domain/errors/not-found.error';
-import { EntityValidationError } from '../../../../shared/domain/validators/validation.error';
-import { Config } from '../../../../shared/infra/config';
-import { UnitOfWorkSequelize } from '../../../../shared/infra/db/sequelize/unit-of-work-sequelize';
-import { GoogleCloudStorage } from '../../../../shared/infra/storage/google-cloud.storage';
-import { Video } from '../../../domain/video.aggregate';
-import { IVideoRepository } from '../../../domain/video.repository';
-import { setupSequelizeForVideo } from '../../../infra/db/sequelize/testing/helpers';
-import { VideoSequelizeRepository } from '../../../infra/db/sequelize/video-sequelize.repository';
-import { VideoModel } from '../../../infra/db/sequelize/video.model';
+} from '../../../../../cast-member/infra/db/sequelize/cast-member-sequelize';
+import { Category } from '../../../../../category/domain/category.aggregate';
+import { ICategoryRepository } from '../../../../../category/domain/category.repository';
+import { CategorySequelizeRepository } from '../../../../../category/infra/db/sequelize/category-sequelize.repository';
+import { CategoryModel } from '../../../../../category/infra/db/sequelize/category.model';
+import { Genre } from '../../../../../genre/domain/genre.aggregate';
+import { IGenreRepository } from '../../../../../genre/domain/genre.repository';
+import { GenreModel } from '../../../../../genre/infra/db/sequelize/genre-model';
+import { GenreSequelizeRepository } from '../../../../../genre/infra/db/sequelize/genre-sequelize.repository';
+import { IStorage } from '../../../../../shared/application/storage.interface';
+import { NotFoundError } from '../../../../../shared/domain/errors/not-found.error';
+import { EntityValidationError } from '../../../../../shared/domain/validators/validation.error';
+import { Config } from '../../../../../shared/infra/config';
+import { UnitOfWorkSequelize } from '../../../../../shared/infra/db/sequelize/unit-of-work-sequelize';
+import { GoogleCloudStorage } from '../../../../../shared/infra/storage/google-cloud.storage';
+import { Video } from '../../../../../video/domain/video.aggregate';
+import { IVideoRepository } from '../../../../../video/domain/video.repository';
+import { setupSequelizeForVideo } from '../../../../../video/infra/db/sequelize/testing/helpers';
+import { VideoSequelizeRepository } from '../../../../../video/infra/db/sequelize/video-sequelize.repository';
+import { VideoModel } from '../../../../../video/infra/db/sequelize/video.model';
 import { UploadImageMediasUseCase } from '../upload-image-medias.use-case';
+
 describe('UploadImageMediasUseCase Integration Tests', () => {
   let uploadImageMediasUseCase: UploadImageMediasUseCase;
   let videoRepo: IVideoRepository;

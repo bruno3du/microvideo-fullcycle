@@ -13,12 +13,12 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
-import { CreateVideoUseCase } from '../../core/video/application/create-video/create-video.use-case';
-import { GetVideoUseCase } from '../../core/video/application/get-video/get-video.use-case';
-import { UpdateVideoInput } from '../../core/video/application/update-video/update-video.input';
-import { UpdateVideoUseCase } from '../../core/video/application/update-video/update-video.use-case';
-import { UploadAudioVideoMediaInput } from '../../core/video/application/upload-audio-video-medias/upload-audio-video-medias.input';
-import { UploadAudioVideoMediasUseCase } from '../../core/video/application/upload-audio-video-medias/upload-audio-video-medias.use-case';
+import { CreateVideoUseCase } from '../../core/video/application/use-cases/create-video/create-video.use-case';
+import { GetVideoUseCase } from '../../core/video/application/use-cases/get-video/get-video.use-case';
+import { UpdateVideoInput } from '../../core/video/application/use-cases/update-video/update-video.input';
+import { UpdateVideoUseCase } from '../../core/video/application/use-cases/update-video/update-video.use-case';
+import { UploadAudioVideoMediaInput } from '../../core/video/application/use-cases/upload-audio-video-medias/upload-audio-video-medias.input';
+import { UploadAudioVideoMediasUseCase } from '../../core/video/application/use-cases/upload-audio-video-medias/upload-audio-video-medias.use-case';
 import { CreateVideoDto } from './dto/create-video.dto';
 import { UpdateVideoDto } from './dto/update-video.dto';
 
@@ -39,7 +39,6 @@ export class VideosController {
   @Post()
   async create(@Body() createVideoDto: CreateVideoDto) {
     const { id } = await this.createUseCase.execute(createVideoDto);
-    //VideoPresenter
     return await this.getUseCase.execute({ id });
   }
 
