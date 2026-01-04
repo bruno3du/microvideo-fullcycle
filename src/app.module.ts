@@ -1,4 +1,4 @@
-import { VideosModule } from '@nest-modules/videos-module/entities/videos-module.entity';
+import { VideosModule } from './nest-modules/videos-module/videos.module';
 import { Module } from '@nestjs/common';
 import { CastMembersModule } from './nest-modules/cast-members-module/cast-members.module';
 import { CategoriesModule } from './nest-modules/categories-module/categories.module';

@@ -10,6 +10,7 @@ import { CATEGORY_PROVIDERS } from './categories.providers';
   providers: [
     ...Object.values(CATEGORY_PROVIDERS.REPOSITORIES),
     ...Object.values(CATEGORY_PROVIDERS.USE_CASES),
+    ...Object.values(CATEGORY_PROVIDERS.VALIDATIONS),
   ],
   exports: [
     CATEGORY_PROVIDERS.REPOSITORIES.CATEGORY_REPOSITORY.provide,
