@@ -59,6 +59,15 @@ const models = [
             models,
             logging: configService.get('DB_LOGGING'),
             autoLoadModels: configService.get('DB_AUTO_LOAD_MODELS'),
+            pool: {
+              max: 5,
+              min: 0,
+              acquire: 30000,
+              idle: 10000,
+            },
+            dialectOptions: {
+              connectTimeout: 10000,
+            },
           };
         }
 

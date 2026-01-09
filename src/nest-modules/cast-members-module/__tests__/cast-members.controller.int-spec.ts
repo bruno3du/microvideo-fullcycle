@@ -134,6 +134,7 @@ describe('CastMembersController Integration Tests', () => {
         async ({ send_data, expected }) => {
           const presenter = await controller.search(send_data);
           const { entities, ...paginationProps } = expected;
+
           expect(presenter).toEqual(
             new CastMemberCollectionPresenter({
               items: entities.map(CastMemberOutputMapper.toOutput),

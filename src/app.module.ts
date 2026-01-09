@@ -1,14 +1,16 @@
 import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
+import { CastMembersModule } from '@nest-modules/cast-members-module/cast-members.module';
+import { CategoriesModule } from '@nest-modules/categories-module/categories.module';
+import { GenresModule } from '@nest-modules/genres-module/genres.module';
+import { UseCaseModule } from '@nest-modules/use-case-module/use-case.module';
+import { VideosModule } from '@nest-modules/videos-module/videos.module';
 import { Module } from '@nestjs/common';
-import { CastMembersModule } from './nest-modules/cast-members-module/cast-members.module';
-import { CategoriesModule } from './nest-modules/categories-module/categories.module';
 import { ConfigModule } from './nest-modules/config-module/config.module';
 import { DatabaseModule } from './nest-modules/database-module/database.module';
 import { EventModule } from './nest-modules/event-module/event.module';
-import { GenresModule } from './nest-modules/genres-module/genres.module';
+import { RabbitmqFakeController } from './nest-modules/rabbitmq-fake/rabbitmq-fake.controller';
+import { RabbitmqFakeModule } from './nest-modules/rabbitmq-fake/rabbitmq-fake.module';
 import { SharedModule } from './nest-modules/shared-module/shared.module';
-import { UseCaseModule } from './nest-modules/use-case-module/use-case.module';
-import { VideosModule } from './nest-modules/videos-module/videos.module';
 
 @Module({
   imports: [
@@ -23,9 +25,11 @@ import { VideosModule } from './nest-modules/videos-module/videos.module';
     VideosModule,
     RabbitMQModule.forRoot(RabbitMQModule, {
       uri: 'amqp://admin:admin@rabbitmq:5672',
+      connectionInitOptions: { wait: false },
+      enableControllerDiscovery: true,
     }),
+    RabbitmqFakeModule,
   ],
-  // providers: [RabbitMQFakeConsumer],
-  // controllers: [RabbitmqFakeController],
+  controllers: [RabbitmqFakeController],
 })
 export class AppModule {}
