@@ -1,4 +1,5 @@
 import { RabbitmqModule } from '@nest-modules/rabbitmq-module/rabbitmq.module';
+import { VideosConsumers } from '@nest-modules/videos-module/videos.consumers';
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { AudioVideoMediaModel } from '../../core/video/infra/db/sequelize/audio-video-media.model';
@@ -35,7 +36,9 @@ import { VIDEOS_PROVIDERS } from './videos.providers';
     ...Object.values(VIDEOS_PROVIDERS.REPOSITORIES),
     ...Object.values(VIDEOS_PROVIDERS.USE_CASES),
     ...Object.values(VIDEOS_PROVIDERS.HANDLERS),
+    VideosConsumers,
   ],
-  //exports: [VIDEOS_PROVIDERS.REPOSITORIES.VIDEO_REPOSITORY.provide],
+
+  exports: [VIDEOS_PROVIDERS.REPOSITORIES.VIDEO_REPOSITORY.provide],
 })
 export class VideosModule {}
