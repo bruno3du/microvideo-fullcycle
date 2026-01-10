@@ -1,9 +1,9 @@
 import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
 import { Test, TestingModule } from '@nestjs/testing';
-import { RabbitmqFakeController } from './rabbitmq-fake.controller';
+import { RabbitMQController } from './rabbitmq.controller';
 
-describe('RabbitmqFakeController', () => {
-  let controller: RabbitmqFakeController;
+describe('RabbitmqController', () => {
+  let controller: RabbitMQController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -12,10 +12,10 @@ describe('RabbitmqFakeController', () => {
           uri: 'amqp://admin:admin@rabbitmq:5672',
         }),
       ],
-      controllers: [RabbitmqFakeController],
+      controllers: [RabbitMQController],
     }).compile();
 
-    controller = module.get<RabbitmqFakeController>(RabbitmqFakeController);
+    controller = module.get<RabbitMQController>(RabbitMQController);
   });
 
   it('should be defined', () => {

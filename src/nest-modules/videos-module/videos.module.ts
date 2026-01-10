@@ -1,3 +1,4 @@
+import { RabbitmqModule } from '@nest-modules/rabbitmq-module/rabbitmq.module';
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { AudioVideoMediaModel } from '../../core/video/infra/db/sequelize/audio-video-media.model';
@@ -24,6 +25,7 @@ import { VIDEOS_PROVIDERS } from './videos.providers';
       ImageMediaModel,
       AudioVideoMediaModel,
     ]),
+    RabbitmqModule.forFeature(),
     CategoriesModule,
     GenresModule,
     CastMembersModule,

@@ -1,8 +1,8 @@
 import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
 import { Controller, Get } from '@nestjs/common';
 
-@Controller('rabbitmq-fake')
-export class RabbitmqFakeController {
+@Controller('rabbitmq')
+export class RabbitMQController {
   constructor(private amqpConnection: AmqpConnection) {}
 
   @Get()

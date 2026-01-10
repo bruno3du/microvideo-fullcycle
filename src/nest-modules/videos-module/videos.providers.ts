@@ -22,6 +22,7 @@ import { VideoModel } from '../../core/video/infra/db/sequelize/video.model';
 import { CAST_MEMBERS_PROVIDERS } from '../cast-members-module/cast-members.providers';
 import { CATEGORY_PROVIDERS } from '../categories-module/categories.providers';
 import { GENRES_PROVIDERS } from '../genres-module/genres.providers';
+import { IMessageBroker } from '@core/shared/application/message-broker.interface';
 
 export const REPOSITORIES = {
   VIDEO_REPOSITORY: {
@@ -147,7 +148,10 @@ export const USE_CASES = {
 export const HANDLERS = {
   PUBLISH_VIDEO_MEDIA_REPLACED_IN_QUEUE_HANDLER: {
     provide: PublishVideoMediaReplacedInQueueHandler,
-    useClass: PublishVideoMediaReplacedInQueueHandler,
+    useFactory: (messageBroker: IMessageBroker) => {
+      return new PublishVideoMediaReplacedInQueueHandler(messageBroker);
+    },
+    inject: ['IMessageBroker'],
   },
 };
 

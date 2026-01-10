@@ -67,6 +67,15 @@ type CONFIG_GOOGLE_SCHEMA_TYPE = {
   GOOGLE_CLOUD_STORAGE_BUCKET_NAME: string;
 };
 
+type CONFIG_RABBITMQ_SCHEMA_TYPE = {
+  RABBITMQ_URI: string;
+};
+
+export const CONFIG_RABBITMQ_SCHEMA: Joi.StrictSchemaMap<CONFIG_RABBITMQ_SCHEMA_TYPE> =
+  {
+    RABBITMQ_URI: Joi.string().required(),
+  };
+
 export const CONFIG_GOOGLE_SCHEMA: Joi.StrictSchemaMap<CONFIG_GOOGLE_SCHEMA_TYPE> =
   {
     GOOGLE_CLOUD_CREDENTIALS: joiJson.object().required(),
@@ -88,6 +97,7 @@ export class ConfigModule extends NestConfigModule {
       validationSchema: Joi.object({
         ...CONFIG_DB_SCHEMA,
         ...CONFIG_GOOGLE_SCHEMA,
+        ...CONFIG_RABBITMQ_SCHEMA,
       }),
       ...otherOptions,
     });
