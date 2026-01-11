@@ -82,6 +82,16 @@ export const CONFIG_GOOGLE_SCHEMA: Joi.StrictSchemaMap<CONFIG_GOOGLE_SCHEMA_TYPE
     GOOGLE_CLOUD_STORAGE_BUCKET_NAME: Joi.string().required(),
   };
 
+type CONFIG_JWT_SCHEMA_TYPE = {
+  JWT_PUBLIC_KEY: string;
+  JWT_PRIVATE_KEY: string;
+};
+
+export const CONFIG_JWT_SCHEMA: Joi.StrictSchemaMap<CONFIG_JWT_SCHEMA_TYPE> = {
+  JWT_PUBLIC_KEY: Joi.string().required(),
+  JWT_PRIVATE_KEY: Joi.string().optional(),
+};
+
 @Module({})
 export class ConfigModule extends NestConfigModule {
   static forRoot(options: ConfigModuleOptions = {}) {
@@ -98,6 +108,7 @@ export class ConfigModule extends NestConfigModule {
         ...CONFIG_DB_SCHEMA,
         ...CONFIG_GOOGLE_SCHEMA,
         ...CONFIG_RABBITMQ_SCHEMA,
+        ...CONFIG_JWT_SCHEMA,
       }),
       ...otherOptions,
     });
