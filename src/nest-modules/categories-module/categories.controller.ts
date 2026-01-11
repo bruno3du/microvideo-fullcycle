@@ -1,3 +1,5 @@
+import { AuthGuard } from '@nest-modules/auth-module/auth.guard';
+import { CheckIsAdminGuard } from '@nest-modules/auth-module/check-is-admin.guard';
 import {
   Body,
   Controller,
@@ -10,6 +12,7 @@ import {
   Patch,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { CategoryOutput } from '../../core/category/application/use-cases/common/category-output';
 import { CreateCategoryUseCase } from '../../core/category/application/use-cases/create-category/create-category.use-case';
@@ -25,6 +28,7 @@ import { CreateCategoryDto } from './dto/create-category.dto';
 import { SearchCategoriesDto } from './dto/search-categories.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 
+@UseGuards(AuthGuard, CheckIsAdminGuard)
 @Controller('categories')
 export class CategoriesController {
   @Inject(CreateCategoryUseCase)

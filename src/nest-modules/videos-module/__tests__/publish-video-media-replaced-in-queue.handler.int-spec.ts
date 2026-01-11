@@ -1,4 +1,5 @@
 import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
+import { AuthModule } from '@nest-modules/auth-module/auth.module';
 import { getConnectionToken } from '@nestjs/sequelize';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ChannelWrapper } from 'amqp-connection-manager';
@@ -40,6 +41,7 @@ describe('PublishVideoMediaReplacedInQueueHandler Integration Tests', () => {
         EventModule,
         UseCaseModule,
         RabbitmqModule.forRoot(),
+        AuthModule,
         VideosModule,
       ],
     })
@@ -75,7 +77,7 @@ describe('PublishVideoMediaReplacedInQueueHandler Integration Tests', () => {
 
   afterEach(async () => {
     await channelWrapper.close();
-    await module.close();
+    await module?.close?.();
   });
 
   it('should publish video media replaced event in queue', async () => {

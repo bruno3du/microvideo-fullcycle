@@ -1,3 +1,4 @@
+import { AuthModule } from '@nest-modules/auth-module/auth.module';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CategoryOutputMapper } from '../../../core/category/application/use-cases/common/category-output';
 import { CreateCategoryUseCase } from '../../../core/category/application/use-cases/create-category/create-category.use-case';
@@ -31,7 +32,12 @@ describe('CategoriesController Integration Tests', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [ConfigModule.forRoot(), DatabaseModule, CategoriesModule],
+      imports: [
+        ConfigModule.forRoot(),
+        DatabaseModule,
+        AuthModule,
+        CategoriesModule,
+      ],
     }).compile();
     controller = module.get<CategoriesController>(CategoriesController);
     repository = module.get<ICategoryRepository>(

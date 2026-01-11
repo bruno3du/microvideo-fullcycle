@@ -10,6 +10,7 @@ import { EventModule } from '../../event-module/event.module';
 import { SharedModule } from '../../shared-module/shared.module';
 import { UseCaseModule } from '../../use-case-module/use-case.module';
 import { VideosModule } from '../videos.module';
+import { AuthModule } from '@nest-modules/auth-module/auth.module';
 
 class RabbitmqModuleFake {
   static forRoot(): DynamicModule {
@@ -40,6 +41,7 @@ describe('VideosModule Unit Tests', () => {
         UseCaseModule,
         DatabaseModule,
         RabbitmqModuleFake.forRoot(),
+        AuthModule,
         VideosModule,
       ],
     })
@@ -54,7 +56,7 @@ describe('VideosModule Unit Tests', () => {
   });
 
   afterEach(async () => {
-    await module.close();
+    await module?.close?.();
   });
 
   it('should register handlers', async () => {

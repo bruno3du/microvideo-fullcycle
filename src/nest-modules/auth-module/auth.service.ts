@@ -5,7 +5,7 @@ import { JwtService } from '@nestjs/jwt';
 export class AuthService {
   constructor(private jwtService: JwtService) {}
 
-  login(email: string, password: string) {
+  login(email: string) {
     //alguma logica para buscar o usuário no banco pelo e-mail
     //verificar as senhas
     const payload = { email, name: 'test' };

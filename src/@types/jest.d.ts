@@ -1,4 +1,4 @@
-import { ValueObject } from '../shared/domain/value-object';
+import { ValueObject } from '../core/shared/domain/value-object';
 import { FieldsErrors } from './shared/domain/validators/validator-fields-interface';
 
 declare global {
