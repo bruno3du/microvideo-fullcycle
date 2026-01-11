@@ -8,7 +8,7 @@ export class AuthController {
 
   @Post()
   login(@Body() body) {
-    return this.authService.login(body.email, body.password);
+    return this.authService.login(body.email);
   }
 
   @UseGuards(AuthGuard)
