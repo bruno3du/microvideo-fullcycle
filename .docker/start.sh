@@ -2,4 +2,4 @@
 
 npm install
 
-exec pnpm start:dev
+tail -f /dev/null
