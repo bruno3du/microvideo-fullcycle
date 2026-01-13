@@ -15,23 +15,27 @@ export class AuthGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
+    console.log('[microvideo:auth-guard]~ canActivate ~ context:', context);
     if (context.getType() !== 'http') {
       return true;
     }
 
     const request: Request = context.switchToHttp().getRequest();
-
+    console.log('[microvideo:auth-guard]~ canActivate ~ request:', request);
     const token = this.extractTokenFromHeader(request);
-
+    console.log('[microvideo:auth-guard]~ canActivate ~ token:', token);
     if (!token) {
       throw new UnauthorizedException();
     }
+    console.log('[microvideo:auth-guard]~ canActivate ~ token:', token);
     try {
       const payload = this.jwtService.verify(token);
-      console.log('🚀 ~ AuthGuard ~ canActivate ~ payload:', payload);
+      console.log('[microvideo:auth-guard]~ canActivate ~ payload:', payload);
+      console.log('~ AuthGuard ~ canActivate ~ payload:', payload);
       request['user'] = payload;
       return true;
     } catch (e) {
+      console.log('[microvideo:auth-guard]~ canActivate ~ e:', e);
       throw new UnauthorizedException();
     }
   }
